@@ -1,3 +1,33 @@
+/*
+===============================================================================
+FILE NAME:          07_silver_erp_loc_a101.sql
+SCHEMA:             silver
+PROCEDURE NAME:     silver.prc_load_erp_loc_a101()
+
+PURPOSE:
+This procedure loads cleaned customer data from bronze.erp_loc_a101
+into silver.erp_locz_a101.
+
+SOURCE TABLE:
+bronze.erp_loc_a101
+
+TARGET TABLE:
+silver.erp_loc_a101
+
+MAIN TRANSFORMATIONS:
+- Exact matching-Replacing
+- Removing Unwanted spaces.
+- Standardized country values.
+
+EXECUTION:
+CALL silver.prc_load_erp_loc_a101();
+
+AUTHOR:             Patrick Orone
+LAYER:              Silver Layer
+LOAD TYPE:          Full Refresh
+===============================================================================
+*/
+
 CREATE OR REPLACE PROCEDURE silver.prc_load_erp_loc_a101()
 LANGUAGE plpgsql
 AS $$
