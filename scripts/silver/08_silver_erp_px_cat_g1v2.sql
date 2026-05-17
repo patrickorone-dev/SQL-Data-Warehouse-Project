@@ -1,3 +1,29 @@
+/*
+===============================================================================
+FILE NAME:          08_silver_erp_px_cat_g1v2.sql
+SCHEMA:             silver
+PROCEDURE NAME:     silver.prc_load_erp_px_cat_g1v2()
+
+PURPOSE:
+This procedure loads cleaned customer data from bronze.erp_px_cat_g1v2
+into silver.erp_px_cat_g1v2.
+SOURCE TABLE:
+bronze.erp_px_cat_g1v2
+
+TARGET TABLE:
+silver.erp_px_cat_g1v2.
+
+MAIN TRANSFORMATIONS:
+- No Transformation Needed. Data was upto date.
+
+EXECUTION:
+CALL silver.prc_load_erp_px_cat_g1v2();
+
+AUTHOR:             Patrick Orone
+LAYER:              Silver Layer
+LOAD TYPE:          Full Refresh
+===============================================================================
+*/
 CREATE OR REPLACE PROCEDURE silver.prc_load_erp_px_cat_g1v2()
 LANGUAGE plpgsql
 AS $$
