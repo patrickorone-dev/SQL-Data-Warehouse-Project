@@ -1,3 +1,49 @@
+/*
+===============================================================================
+FILE NAME:          03_silver_crm_cust_info.sql
+SCHEMA:             silver
+PROCEDURE NAME:     silver.prc_load_crm_cust_info()
+
+PURPOSE:
+This procedure loads cleaned customer data from bronze.crm_cust_info
+into silver.crm_cust_info.
+
+SOURCE TABLE:
+bronze.crm_cust_info
+
+TARGET TABLE:
+silver.crm_cust_info
+
+MAIN TRANSFORMATIONS:
+- Removes leading/trailing spaces
+- Standardizes gender values
+- Standardizes marital status values
+- Converts dates safely
+- Removes NULL customer IDs
+- Removes duplicate customer records
+- Retains latest customer record using ROW_NUMBER()
+
+BUSINESS RULES:
+- One row per customer (cst_id)
+- Latest customer record is retained
+- Invalid gender values mapped to 'n/a'
+- Invalid marital status mapped to 'n/a'
+
+DEPENDENCIES:
+- functions.fn_trim_text()
+- functions.fn_map_gender()
+- functions.fn_map_marital_status()
+- functions.fn_safe_to_date()
+
+EXECUTION:
+CALL silver.prc_load_crm_cust_info();
+
+AUTHOR:             Patrick Orone
+LAYER:              Silver Layer
+LOAD TYPE:          Full Refresh
+===============================================================================
+*/
+
 CREATE OR REPLACE PROCEDURE silver.prc_load_crm_cust_info()
 LANGUAGE plpgsql
 AS $$
