@@ -1,3 +1,31 @@
+/*
+===============================================================================
+PROCEDURE: silver.prc_load_silver_all()
+
+PURPOSE:
+This procedure orchestrates all silver-layer transformations.
+
+ROLE IN PIPELINE:
+Second stage of ETL after bronze.load_bronze().
+
+WHAT IT DOES:
+- Calls all individual silver ETL procedures
+- Cleans and standardizes data
+- Removes duplicates
+- Applies business rules
+
+DEPENDENCIES:
+- bronze.load_bronze()
+- silver individual ETL procedures
+- helper functions
+
+OUTPUT:
+Populates all silver tables with cleaned data.
+
+EXECUTION:
+CALL silver.prc_load_silver_all();
+===============================================================================
+*/
 CREATE OR REPLACE PROCEDURE silver.prc_load_silver_all()
 LANGUAGE plpgsql
 AS $$
