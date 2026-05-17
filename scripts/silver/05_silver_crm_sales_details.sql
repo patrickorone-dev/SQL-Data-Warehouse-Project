@@ -1,3 +1,50 @@
+/*
+===============================================================================
+FILE NAME:          05_silver_crm_sales_details.sql
+SCHEMA:             silver
+PROCEDURE NAME:     silver.prc_load_crm_sales_details()
+
+PURPOSE:
+This procedure loads cleaned customer data from bronze.crm_sales_details
+into silver.crm_sales_details.
+
+SOURCE TABLE:
+bronze.crm_sales_details
+
+TARGET TABLE:
+silver.crm_sales_details
+
+MAIN TRANSFORMATIONS:
+- Handled Inconsistent Data Formats Text to Date
+- Identified incorrect dates.
+- Handles null values for Dates
+- Fixing negative Values
+- Handling Zeros
+- Retains latest customer record using ROW_NUMBER()
+
+BUSINESS RULES:
+- Invalid dates mapped to 'n/a'
+Business RULES
+sales = Quantity * price
+therefore negative numbers, zeros, null are not allowed. 
+
+Rules for cleaning and transforming sls_sales, sls_quantity and sls_price
+	if Sales is negative, zero or null derive it using quantity and price
+	if price is zero or null, calculate it using sales and quantity
+	if price is negative, convert it to a positive value. 
+
+DEPENDENCIES:
+- functions.fn_map_sls_date()
+
+EXECUTION:
+CALL silver.prc_load_crm_sales_details();
+
+AUTHOR:             Patrick Orone
+LAYER:              Silver Layer
+LOAD TYPE:          Full Refresh
+===============================================================================
+*/
+
 CREATE OR REPLACE PROCEDURE silver.prc_load_crm_sales_details()
 LANGUAGE plpgsql
 AS $$
