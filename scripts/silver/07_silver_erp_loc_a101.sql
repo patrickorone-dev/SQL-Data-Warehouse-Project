@@ -6,7 +6,7 @@ PROCEDURE NAME:     silver.prc_load_erp_loc_a101()
 
 PURPOSE:
 This procedure loads cleaned customer data from bronze.erp_loc_a101
-into silver.erp_locz_a101.
+into silver.erp_loc_a101.
 
 SOURCE TABLE:
 bronze.erp_loc_a101
