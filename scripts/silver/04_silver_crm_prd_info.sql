@@ -1,3 +1,42 @@
+/*
+===============================================================================
+FILE NAME:          03_silver_crm_prd_info.sql
+SCHEMA:             silver
+PROCEDURE NAME:     silver.prc_load_crm_prd_info()
+
+PURPOSE:
+This procedure loads cleaned customer data from bronze.crm_prd_info
+into silver.crm_prd_info.
+
+SOURCE TABLE:
+bronze.crm_prd_info
+
+TARGET TABLE:
+silver.crm_prd_info
+
+MAIN TRANSFORMATIONS:
+- Standardizes prd_line values
+- Converts dates safely
+- Removes NULL product IDs
+- Derived New Columns
+- Data Transformation.
+
+BUSINESS RULES:
+-prd_cost values are 0 if null.
+
+DEPENDENCIES:
+- functions.fn_safe_date()
+- functions.fn_map_prd_line()
+
+EXECUTION:
+CALL silver.prc_load_crm_prd_info();
+
+AUTHOR:             Patrick Orone
+LAYER:              Silver Layer
+LOAD TYPE:          Full Refresh
+===============================================================================
+*/
+
 CREATE OR REPLACE PROCEDURE silver.prc_load_crm_prd_info()
 LANGUAGE plpgsql
 AS $$
