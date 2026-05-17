@@ -1,3 +1,34 @@
+/*
+===============================================================================
+PROCEDURE: warehouse.prc_run_etl_pipeline()
+
+PURPOSE:
+Master orchestration procedure that runs the entire data warehouse ETL pipeline.
+
+ROLE IN ARCHITECTURE:
+This is the CONTROL TOWER of the system.
+
+PIPELINE FLOW:
+1. bronze.load_bronze()  --> Load raw data
+2. silver.prc_load_silver_all() --> Clean and transform data
+
+FEATURES:
+- End-to-end pipeline execution
+- Logging of pipeline start/end
+- Error handling across layers
+- Execution timing tracking
+
+DEPENDENCIES:
+- bronze.load_bronze()
+- silver.prc_load_silver_all()
+
+EXECUTION:
+CALL warehouse.prc_run_etl_pipeline();
+
+USAGE:
+This is the ONLY procedure needed to run full ETL pipeline.
+===============================================================================
+*/
 CREATE OR REPLACE PROCEDURE warehouse.prc_run_etl_pipeline()
 LANGUAGE plpgsql
 AS $$
